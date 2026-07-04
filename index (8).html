@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blimb — Home Services in 10 Minutes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --orange:#FF6B35;
+      --dark:#1a1a1a;
+      --cream:#FFF8F4;
+      --gray:#f5f5f5;
+      --text:#333;
+      --light:#888;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter',sans-serif;background:#fff;color:var(--dark);overflow-x:hidden;padding-bottom:70px;}
+
+    /* NAV */
+    nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 20px;height:58px;background:#fff;
+      border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:1000;
+    }
+    .logo{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--dark);}
+    .logo span{color:var(--orange);}
+    .nav-right{display:flex;align-items:center;gap:10px;}
+    .nav-location{font-size:12px;color:var(--text);display:flex;align-items:center;gap:4px;cursor:pointer;}
+    .nav-location b{color:var(--dark);}
+    .login-btn{background:var(--orange);color:#fff;border:none;padding:8px 18px;border-radius:50px;font-size:13px;font-weight:600;cursor:pointer;}
+
+    /* SEARCH */
+    .search-bar{padding:14px 20px;background:#fff;}
+    .search-inner{display:flex;align-items:center;gap:10px;background:var(--gray);border-radius:14px;padding:12px 16px;}
+    .search-inner input{border:none;background:transparent;font-size:14px;width:100%;outline:none;color:var(--dark);}
+    .search-inner input::placeholder{color:#aaa;}
+
+    /* HERO */
+    .hero{background:var(--cream);padding:24px 20px 0;overflow:hidden;position:relative;}
+    .hero-tag{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #ffe0d0;color:var(--orange);font-size:12px;font-weight:700;padding:5px 12px;border-radius:50px;margin-bottom:14px;}
+    .hero h1{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;line-height:1.15;letter-spacing:-0.5px;margin-bottom:10px;}
+    .hero h1 em{color:var(--orange);font-style:normal;}
+    .hero p{font-size:14px;color:#666;line-height:1.6;margin-bottom:20px;max-width:260px;}
+    .hero-btns{display:flex;gap:10px;margin-bottom:24px;}
+    .btn-orange{background:var(--orange);color:#fff;padding:12px 22px;border-radius:50px;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;display:inline-block;}
+    .btn-ghost{background:transparent;color:var(--orange);padding:12px 22px;border-radius:50px;font-size:14px;font-weight:700;border:2px solid var(--orange);cursor:pointer;text-decoration:none;display:inline-block;}
+    .hero-cards{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:20px;}
+    .hero-cards::-webkit-scrollbar{display:none;}
+    .hero-card{min-width:130px;background:#fff;border-radius:16px;padding:16px 12px;text-align:center;flex-shrink:0;box-shadow:0 2px 12px rgba(255,107,53,0.08);}
+    .hero-card-icon{font-size:32px;margin-bottom:8px;}
+    .hero-card h4{font-size:12px;font-weight:700;color:var(--dark);margin-bottom:2px;}
+    .hero-card p{font-size:11px;color:var(--light);}
+
+    /* STATS */
+    .stats{display:flex;background:var(--dark);padding:16px 20px;gap:0;}
+    .stat{flex:1;text-align:center;border-right:1px solid #333;}
+    .stat:last-child{border-right:none;}
+    .stat h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--orange);}
+    .stat p{font-size:10px;color:#888;margin-top:2px;}
+
+    /* SECTION */
+    .section{padding:24px 20px;}
+    .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+    .section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;}
+    .see-all{color:var(--orange);font-size:12px;font-weight:600;cursor:pointer;}
+
+    /* CAT GRID */
+    .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+    .cat-item{text-align:center;cursor:pointer;}
+    .cat-icon-box{background:var(--gray);border-radius:16px;height:64px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:6px;transition:all 0.2s;}
+    .cat-item:hover .cat-icon-box{background:#ffe0d0;transform:scale(1.05);}
+    .cat-item p{font-size:10px;font-weight:600;color:var(--text);line-height:1.3;}
+
+    /* SERVICE SCROLL */
+    .svc-scroll{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;}
+    .svc-scroll::-webkit-scrollbar{display:none;}
+    .svc-card{min-width:148px;flex-shrink:0;border-radius:16px;overflow:hidden;border:1px solid #f0f0f0;cursor:pointer;transition:box-shadow 0.2s;}
+    .svc-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.08);}
+    .svc-img{height:100px;background:var(--gray);display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;}
+    .svc-badge{position:absolute;top:8px;left:8px;background:#e53e3e;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;}
+    .svc-badge.green{background:#22c55e;}
+    .svc-body{padding:10px;}
+    .svc-body h4{font-size:12px;font-weight:700;margin-bottom:3px;}
+    .svc-rating{font-size:10px;color:var(--light);}
+    .svc-price{font-size:13px;font-weight:700;margin-top:4px;}
+    .svc-price s{font-size:10px;color:#bbb;font-weight:400;margin-left:3px;}
+
+    /* OFFER STRIP */
+    .offer-strip{margin:0 20px 24px;background:linear-gradient(135deg,#FF6B35 0%,#ff9a6c 100%);border-radius:20px;padding:20px;display:flex;justify-content:space-between;align-items:center;overflow:hidden;position:relative;}
+    .offer-strip::after{content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;background:rgba(255,255,255,0.1);border-radius:50%;}
+    .offer-strip h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;}
+    .offer-strip p{font-size:12px;color:rgba(255,255,255,0.85);margin-bottom:12px;}
+    .offer-strip-btn{background:#fff;color:var(--orange);border:none;padding:8px 16px;border-radius:50px;font-size:12px;font-weight:700;cursor:pointer;}
+    .offer-emoji{font-size:52px;position:relative;z-index:1;}
+
+    /* HOW IT WORKS */
+    .how-section{background:var(--cream);padding:24px 20px;}
+    .how-steps{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;margin-top:16px;}
+    .how-steps::-webkit-scrollbar{display:none;}
+    .how-step{min-width:150px;flex-shrink:0;padding:0 16px 0 0;position:relative;}
+    .how-step::after{content:'→';position:absolute;right:0;top:20px;color:#ddd;font-size:18px;}
+    .how-step:last-child::after{display:none;}
+    .step-circle{width:44px;height:44px;background:var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:10px;}
+    .how-step h4{font-size:13px;font-weight:700;margin-bottom:4px;}
+    .how-step p{font-size:11px;color:var(--light);line-height:1.5;}
+
+    /* WORKER BANNER */
+    .worker-banner{margin:24px 20px;background:var(--dark);border-radius:20px;padding:22px;display:flex;justify-content:space-between;align-items:center;}
+    .worker-banner h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-bottom:6px;}
+    .worker-banner p{font-size:12px;color:#888;margin-bottom:14px;}
+    .worker-btn{background:var(--orange);color:#fff;border:none;padding:10px 18px;border-radius:50px;font-size:12px;font-weight:700;cursor:pointer;}
+    .worker-emoji{font-size:48px;}
+
+    /* FOOTER */
+    footer{background:var(--gray);padding:24px 20px;border-top:1px solid #eee;}
+    .footer-logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:16px;}
+    .footer-logo span{color:var(--orange);}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin-bottom:20px;}
+    .footer-grid a{color:#666;font-size:12px;text-decoration:none;line-height:2;}
+    .footer-copy{font-size:11px;color:#aaa;}
+
+    /* BOTTOM NAV */
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #f0f0f0;display:flex;z-index:999;}
+    .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0;cursor:pointer;gap:3px;text-decoration:none;color:#aaa;font-size:10px;font-weight:600;}
+    .bnav-item.active{color:var(--orange);}
+    .bnav-item span{font-size:20px;}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Bl<span>i</span>mb</div>
+  <div class="nav-right">
+    <div class="nav-location">📍 <b>Kolkata</b> ▾</div>
+    <button class="login-btn" onclick="location.href='login.html'">Login</button>
+  </div>
+</nav>
+
+<!-- SEARCH -->
+<div class="search-bar">
+  <div class="search-inner">
+    <span>🔍</span>
+    <input type="text" placeholder="Search for 'AC repair', 'Cook'..."/>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">⚡ 10 Minute Guarantee</div>
+  <h1>Your Home,<br/><em>Perfectly</em><br/>Serviced.</h1>
+  <p>Book verified professionals for any home service. Instantly.</p>
+  <div class="hero-btns">
+    <a href="login.html" class="btn-orange">Book a Service</a>
+    <a href="worker-register.html" class="btn-ghost">Earn with us</a>
+  </div>
+  <div class="hero-cards">
+    <div class="hero-card"><div class="hero-card-icon">🧹</div><h4>Cleaning</h4><p>From ₹299</p></div>
+    <div class="hero-card"><div class="hero-card-icon">❄️</div><h4>AC Repair</h4><p>From ₹299</p></div>
+    <div class="hero-card"><div class="hero-card-icon">💆</div><h4>Massage</h4><p>From ₹599</p></div>
+    <div class="hero-card"><div class="hero-card-icon">⚡</div><h4>Electrician</h4><p>From ₹49</p></div>
+    <div class="hero-card"><div class="hero-card-icon">✂️</div><h4>Haircut</h4><p>From ₹199</p></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><h3>10m</h3><p>Response</p></div>
+  <div class="stat"><h3>50+</h3><p>Services</p></div>
+  <div class="stat"><h3>4.9★</h3><p>Rating</p></div>
+  <div class="stat"><h3>100%</h3><p>Verified</p></div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">All Services</h2>
+    <span class="see-all">See all →</span>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-item"><div class="cat-icon-box">🧹</div><p>Cleaning</p></div>
+    <div class="cat-item"><div class="cat-icon-box">🔧</div><p>Plumber</p></div>
+    <div class="cat-item"><div class="cat-icon-box">⚡</div><p>Electrician</p></div>
+    <div class="cat-item"><div class="cat-icon-box">👨‍🍳</div><p>Cook</p></div>
+    <div class="cat-item"><div class="cat-icon-box">✂️</div><p>Haircut</p></div>
+    <div class="cat-item"><div class="cat-icon-box">💆</div><p>Massage</p></div>
+    <div class="cat-item"><div class="cat-icon-box">🧱</div><p>Mason</p></div>
+    <div class="cat-item"><div class="cat-icon-box">❄️</div><p>AC Repair</p></div>
+    <div class="cat-item"><div class="cat-icon-box">👶</div><p>Baby Sitter</p></div>
+    <div class="cat-item"><div class="cat-icon-box">💅</div><p>Parlour</p></div>
+    <div class="cat-item"><div class="cat-icon-box">🖥️</div><p>Computer</p></div>
+    <div class="cat-item"><div class="cat-icon-box">🚿</div><p>Bathroom</p></div>
+  </div>
+</div>
+
+<!-- OFFER STRIP -->
+<div class="offer-strip">
+  <div>
+    <h3>First Booking FREE!</h3>
+    <p>Use code <b>BLIMB1ST</b> — Save ₹200</p>
+    <button class="offer-strip-btn" onclick="location.href='login.html'">Claim Now</button>
+  </div>
+  <div class="offer-emoji">🎁</div>
+</div>
+
+<!-- MOST BOOKED -->
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">Most Booked</h2>
+    <span class="see-all">See all →</span>
+  </div>
+  <div class="svc-scroll">
+    <div class="svc-card">
+      <div class="svc-img">🧹<span class="svc-badge green">Popular</span></div>
+      <div class="svc-body"><h4>House Cleaning</h4><div class="svc-rating">★ 4.80 · 6M bookings</div><div class="svc-price">₹499 <s>₹699</s></div></div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-img">❄️<span class="svc-badge">17% OFF</span></div>
+      <div class="svc-body"><h4>AC Service</h4><div class="svc-rating">★ 4.76 · 2.8M bookings</div><div class="svc-price">₹599</div></div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-img">🔧</div>
+      <div class="svc-body"><h4>Plumber</h4><div class="svc-rating">★ 4.73 · 174K bookings</div><div class="svc-price">₹49</div></div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-img">✂️</div>
+      <div class="svc-body"><h4>Haircut for Men</h4><div class="svc-rating">★ 4.86 · 477K bookings</div><div class="svc-price">₹259</div></div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-img">💆<span class="svc-badge">New</span></div>
+      <div class="svc-body"><h4>Massage</h4><div class="svc-rating">★ 4.81 · 19K bookings</div><div class="svc-price">₹999 <s>₹1,199</s></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+  <div class="section-header">
+    <h2 class="section-title">How Blimb Works</h2>
+  </div>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="step-circle">1</div>
+      <h4>Choose Service</h4>
+      <p>Browse 50+ services & pick what you need</p>
+    </div>
+    <div class="how-step">
+      <div class="step-circle">2</div>
+      <h4>Get Matched</h4>
+      <p>We find a verified pro near you in 10 min</p>
+    </div>
+    <div class="how-step">
+      <div class="step-circle">3</div>
+      <h4>Confirm PIN</h4>
+      <p>Worker arrives, verify with your secret PIN</p>
+    </div>
+    <div class="how-step">
+      <div class="step-circle">4</div>
+      <h4>Pay & Rate</h4>
+      <p>Cash or online — rate your experience</p>
+    </div>
+  </div>
+</div>
+
+<!-- WORKER BANNER -->
+<div class="worker-banner">
+  <div>
+    <h3>Earn with Blimb</h3>
+    <p>Join 10,000+ professionals earning daily</p>
+    <button class="worker-btn" onclick="location.href='worker-register.html'">Register as a Pro →</button>
+  </div>
+  <div class="worker-emoji">👷</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Bl<span>i</span>mb</div>
+  <div class="footer-grid">
+    <a href="#">About us</a>
+    <a href="#">Blimb reviews</a>
+    <a href="#">Terms & conditions</a>
+    <a href="#">Contact us</a>
+    <a href="#">Privacy policy</a>
+    <a href="worker-register.html">Become a Pro</a>
+    <a href="#">Careers</a>
+    <a href="#">Help & Support</a>
+  </div>
+  <div class="footer-copy">© 2026 Blimb Technologies. All rights reserved. Made in India 🇮🇳</div>
+</footer>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <a href="index.html" class="bnav-item active"><span>🏠</span>Home</a>
+  <a href="#" class="bnav-item"><span>🛎️</span>Bookings</a>
+  <a href="#" class="bnav-item"><span>🔍</span>Explore</a>
+  <a href="login.html" class="bnav-item"><span>👤</span>Account</a>
+</div>
+
+</body>
+</html>
